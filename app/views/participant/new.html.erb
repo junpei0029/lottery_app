@@ -1,0 +1,22 @@
+<h1><%= I18n.t('title.title_lottery_new') %></h1>
+<p></p>
+<%= form_for(@participant, url: {action: "create"}) do |f| %>
+  <% if @participant.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @participant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :lottery_id %>
+  <div class="field">
+    <%= f.label :user_name %><br>
+    <%= f.text_field :user_name, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit t('button.button_create'), class: "btn btn-default btn-block" %>
+    <%= link_to t('button.button_back'), root_path, class: "btn btn-default btn-block" %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+<h1><%= I18n.t('title.title_lottery_index') %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Lottery.human_attribute_name(:name) %></th>
+      <th><%= Lottery.human_attribute_name(:status) %></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Array(@lotteries).each do |lottery| %>
+      <tr>
+        <td><%= lottery.name %></td>
+        <td><%= lottery.status_i18n %></td>
+        <td><%= link_to t('button.button_show'), lottery_path(lottery), class: "btn btn-default" %></td>
+        <td><%#= link_to '更新', edit_lottery_path(lottery), class: "btn btn-default" %></td>
+        <td><%= link_to t('button.button_destroy'), lottery_path(lottery), method: :delete, data: { confirm: '削除しますか?' }, class: "btn btn-default" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('button.button_create'), new_lottery_path, class: "btn btn-default" %>
