@@ -1,0 +1,75 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+ja:
+  activerecord: &activerecord
+    models:
+      lottery: "抽選"
+      participant: "参加フォーム"
+    attributes:
+      lottery:
+        name: "抽選名"
+        winning_number: "当選数"
+        detail: "詳細"
+        status: "抽選状態"
+        url: "URL"
+        participants: "参加者数"
+      participant:
+        user_name: "参加者"
+
+  # activemodelの翻訳もactiverecordに記載している
+  activemodel:
+    <<: activerecord
+
+  enums:
+      lottery:
+        status:
+          wanted: "抽選前"
+          ongoing: "抽選中"
+          finished: "抽選後"
+      participant:
+        result:
+          none: "はずれ"
+          winning: "当選!!"
+
+  title:
+    title_lottery_index: "抽選さん"
+    title_lottery_show: "抽選を実行しよう"
+    title_lottery_new: "抽選を登録しよう"
+    title_participant_new: "抽選に参加しよう"
+
+  button:
+    button_create: "登録する"
+    button_update: "更新する"
+    button_show: "詳細"
+    button_back: "戻る"
+    button_destroy: "削除"
+    button_lottery_exec: "抽選をする"

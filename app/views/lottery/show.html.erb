@@ -1,0 +1,48 @@
+<h1><%= I18n.t('title.title_lottery_show') %></h1>
+<p></p>
+<div class="field">
+  <%= Lottery.human_attribute_name(:name) %><br>
+  <%= @lottery.name %>
+</div>
+<div class="field">
+  <%= Lottery.human_attribute_name(:winning_number) %><br>
+  <%= @lottery.winning_number %>
+</div>
+<div class="field">
+  <%= Lottery.human_attribute_name(:detail) %><br>
+  <%= @lottery.detail %>
+</div>
+<div class="field">
+  <%= Lottery.human_attribute_name(:status) %><br>
+  <%= @lottery.status_i18n %>
+</div>
+<div class="field">
+  <%= Lottery.human_attribute_name(:url) %><br>
+  <input type="text" value="<%= URI.encode(url_for controller: :participant, action: :new, lottery_id: @lottery.id, only_path: false) %>" onclick="this.setSelectionRange(0,9999);" readonly>
+</div>
+<div class="field">
+  <%= Lottery.human_attribute_name(:participants) %><br>
+  <%= @lottery.participants.count %>
+</div>
+
+<%#= link_to '抽選実行', exec_lottery_path(@lottery), class: "btn btn-default" if @lottery.status_before_type_cast == Lottery.statuses[:wanted] %>
+<%= link_to t('button.button_lottery_exec'), exec_lottery_path(@lottery), class: "btn btn-default" %>
+<table  class="table">
+  <thead>
+    <tr>
+      <th><%= Participant.human_attribute_name(:user_name) %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Array(@lottery.participants).each do |participant| %>
+      <tr>
+        <td><%= participant.user_name %></td>
+        <td><%= participant.result_i18n if @lottery.status_before_type_cast == Lottery.statuses[:finished] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('button.button_back'), root_path, class: "btn btn-default" %>

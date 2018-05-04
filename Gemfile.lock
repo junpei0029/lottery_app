@@ -89,6 +89,8 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     debug_inspector (0.0.3)
+    enum_help (0.0.17)
+      activesupport (>= 3.0.0)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.23)
@@ -150,6 +152,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails-i18n (5.1.1)
+      i18n (>= 0.7, < 2)
+      railties (>= 5.0, < 6)
     railties (5.2.0)
       actionpack (= 5.2.0)
       activesupport (= 5.2.0)
@@ -235,11 +240,13 @@ DEPENDENCIES
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  enum_help
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.11)
   rack-mini-profiler
   rails (~> 5.2.0)
+  rails-i18n
   rubocop
   sass-rails (~> 5.0)
   selenium-webdriver
