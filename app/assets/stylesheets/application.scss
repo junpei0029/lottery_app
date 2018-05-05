@@ -16,3 +16,7 @@ body {
 .notice {
   @extend .deep-orange-text, .text-darken-4;
 }
+
+.page-footer {
+  padding-top: 0
+}
