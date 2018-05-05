@@ -11,7 +11,7 @@ class ParticipantController < ApplicationController
 
     respond_to do |format|
       if @participant.save
-        format.html { redirect_to controller: :lottery, action: :show, notice: '抽選に参加しました', id: @participant.lottery_id}
+        format.html { redirect_to({controller: :lottery, action: :show, id: @participant.lottery_id}, notice: '抽選に参加しました')}
       else
         format.html { render :new }
       end

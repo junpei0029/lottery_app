@@ -15,7 +15,7 @@ class LotteryController < ApplicationController
 
     respond_to do |format|
       if @lottery.save
-        format.html { redirect_to action: :show, id: @lottery.id, notice: '抽選を登録しました'}
+        format.html { redirect_to({action: :show, id: @lottery.id}, notice: '抽選を登録しました')}
       else
         format.html { render :new }
       end
@@ -29,7 +29,7 @@ class LotteryController < ApplicationController
     # TODO error処理
     #if @lottery.status_before_type_cast == Lottery.statuses[:finished] or @lottery.participants.count < @lottery.winning_number
     #end
-    
+
     # 抽選対象者取得
     participants = @lottery.participants.sort_by{rand}.take(@lottery.winning_number)
     Array(participants).each do |participant|
@@ -39,9 +39,9 @@ class LotteryController < ApplicationController
 
     respond_to do |format|
       if @lottery.save
-        format.html { redirect_to action: :show, id: @lottery.id, notice: '抽選を実行しました'}
+        format.html { redirect_to({action: :show, id: @lottery.id}, notice: '抽選を実行しました')}
       else
-        format.html { redirect_to action: :show, id: @lottery.id, notice: '抽選が失敗しました'}
+        format.html { redirect_to({action: :show, id: @lottery.id}, notice: '抽選が失敗しました')}
       end
     end
   end
