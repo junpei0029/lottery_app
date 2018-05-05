@@ -43,7 +43,7 @@ ja:
         url: "URL"
         participants: "参加者数"
       participant:
-        user_name: "参加者"
+        user_name: "参加者名"
 
   # activemodelの翻訳もactiverecordに記載している
   activemodel:
@@ -52,9 +52,9 @@ ja:
   enums:
       lottery:
         status:
-          wanted: "抽選前"
+          wanted: "抽選未実施"
           ongoing: "抽選中"
-          finished: "抽選後"
+          finished: "抽選済み"
       participant:
         result:
           none: "はずれ"

@@ -4,7 +4,7 @@ class Participant < ApplicationRecord
 
   belongs_to :lottery
   validates :user_name, :result, presence: true
-
+  validates :user_name, uniqueness: true
   #scope :order_desc, lambda {
   #  order("updated_at desc")
   #}

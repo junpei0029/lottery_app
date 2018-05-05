@@ -1,27 +1,62 @@
-<h1><%= I18n.t('title.title_lottery_index') %></h1>
+<div class="container">
+  <h3><%= "Lottery" %></h3>
+  <p>Lotteryとは、簡単にインターネット上で抽選ができるサービスです。15秒で抽選募集が作成できます。</p>
+  <p>
+    以下の５ステップで抽選ができます
+    <br>①抽選を作成する
+    <br>②参加者にURLを共有する
+    <br>③参加者はURLから参加登録する
+    <br>④抽選する
+    <br>⑤抽選結果を共有する
+  </p>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Lottery.human_attribute_name(:name) %></th>
-      <th><%= Lottery.human_attribute_name(:status) %></th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% Array(@lotteries).each do |lottery| %>
-      <tr>
-        <td><%= lottery.name %></td>
-        <td><%= lottery.status_i18n %></td>
-        <td><%= link_to t('button.button_show'), lottery_path(lottery), class: "btn btn-default" %></td>
-        <td><%#= link_to '更新', edit_lottery_path(lottery), class: "btn btn-default" %></td>
-        <td><%= link_to t('button.button_destroy'), lottery_path(lottery), method: :delete, data: { confirm: '削除しますか?' }, class: "btn btn-default" %></td>
-      </tr>
+  <div>
+    <%= link_to new_lottery_path, class: "waves-effect waves-light btn-large btn", style: "width: 100%;" do %>
+      <%= "まずは抽選を" + t("button.button_create") %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+  <br>
 
-<br>
+  <table class="table highlight">
+    <thead>
+      <tr>
+        <th><%= Lottery.human_attribute_name(:name) %></th>
+        <th><%= Lottery.human_attribute_name(:status) %></th>
+        <th></th>
+      </tr>
+    </thead>
 
-<%= link_to t('button.button_create'), new_lottery_path, class: "btn btn-default" %>
+    <tbody>
+      <% Array(@lotteries).each do |lottery| %>
+        <tr>
+          <td><%= lottery.name %></td>
+          <td><%= lottery.status_i18n %></td>
+          <td>
+            <%= link_to t('button.button_show'), lottery_path(lottery), class: "waves-effect waves-light btn" %>
+            <%= link_to t('button.button_destroy'), "#delete_modal_#{lottery.id}", class: "waves-effect waves-light btn modal-trigger" %>
+            <!-- Modal Structure -->
+            <div id="<%= 'delete_modal_' + lottery.id.to_s %>" class="modal">
+              <div class="modal-content">
+                <h4>削除しますか？</h4>
+                <p>削除した抽選は今後見ることはできません。</p>
+              </div>
+              <div class="modal-footer">
+                <%= link_to "はい", lottery_path(lottery), method: :delete, class: "modal-close waves-effect waves-green btn-flat" %>
+                <%= link_to "いいえ", "#!", class: "modal-close waves-effect waves-green btn-flat" %>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>
