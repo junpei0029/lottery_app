@@ -14,15 +14,15 @@
       <% end %>
 
       <div class="input-field col s12">
-        <%= f.label :name %><br>
+        <%= f.label :name %>
         <%= f.text_field :name, class: "validate", placeholder: "抽選のタイトル" %>
       </div>
       <div class="input-field col s12">
-        <%= f.label :winning_number %><br>
         <%= f.select :winning_number, (1..5).map{ |p| ["#{p}人", p] }, {}, {class: 'validate'} %>
+        <%= f.label :winning_number %>
       </div>
       <div class="input-field col s12">
-        <%= f.label :detail %><br>
+        <%= f.label :detail %>
         <%= f.text_area :detail, class: "materialize-textarea", placeholder: "当選者にプレゼントをあげるなど" %>
       </div>
       <div class="actions center">
@@ -36,9 +36,9 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function() {
-  M.textareaAutoResize($('#lottery_detail'));
-  M.updateTextFields();
-  $('select').formSelect();
-});
+  $(document).ready(function() {
+    M.textareaAutoResize($('#lottery_detail'));
+    M.updateTextFields();
+    $('select').formSelect();
+  });
 </script>
