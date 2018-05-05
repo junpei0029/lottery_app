@@ -76,3 +76,7 @@ gem 'rails-i18n'
 gem 'enum_help'
 gem 'materialize-sass', '~> 1.0.0.beta'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+
+group :production do
+  gem 'pg'
+end

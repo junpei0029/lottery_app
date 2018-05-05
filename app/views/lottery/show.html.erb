@@ -15,8 +15,7 @@
 
 
     <div class="center">
-      <%#= link_to '抽選実行', exec_lottery_path(@lottery), class: "btn btn-default" if @lottery.status_before_type_cast == Lottery.statuses[:wanted] %>
-      <%= link_to t('button.button_lottery_exec'), exec_lottery_path(@lottery), class: "btn btn-default" %>
+      <%= link_to t('button.button_lottery_exec'), exec_lottery_path(@lottery), class: "btn waves-effect waves-light" if @lottery.status_before_type_cast == Lottery.statuses[:wanted] %>
     </div>
     <br>
 

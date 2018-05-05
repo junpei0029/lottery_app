@@ -8,8 +8,10 @@ class Lottery < ApplicationRecord
   validates :name, :winning_number, :status, presence: true
   validates :winning_number, numericality: {greater_than_or_equal_to: 1, less_than_or_equal_to: 5}
 
-  #scope :order_desc, lambda {
-  #  order("updated_at desc")
-  #}
+  scope :my_lotteries, -> (session_id){
+    s = order("updated_at desc")
+    s = s.where(user_session: session_id)
+    s
+  }
 
 end

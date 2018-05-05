@@ -1,8 +1,9 @@
 class LotteryController < ApplicationController
-  before_action :set_lottery, only: [:show, :exec, :destroy]
+  before_action :set_lottery, only: [:show]
+  before_action :set_my_lottery, only: [:exec, :destroy]
 
   def index
-    @lotteries = Lottery.all
+    @lotteries = Lottery.my_lotteries(session_id)
   end
 
   def new
@@ -12,6 +13,7 @@ class LotteryController < ApplicationController
   def create
     @lottery = Lottery.new(lottery_params)
     @lottery.status = Lottery.statuses[:wanted]
+    @lottery.user_session = request.session_options[:id]
 
     respond_to do |format|
       if @lottery.save
@@ -26,9 +28,11 @@ class LotteryController < ApplicationController
   end
 
   def exec
-    # TODO error処理
-    #if @lottery.status_before_type_cast == Lottery.statuses[:finished] or @lottery.participants.count < @lottery.winning_number
-    #end
+    # error処理
+    if @lottery.status_before_type_cast == Lottery.statuses[:finished] or @lottery.participants.count < @lottery.winning_number
+      redirect_to({action: :show, id: @lottery.id}, notice: '抽選が失敗しました。参加者人数が足りません。当選者数より多く参加者を集めてください。')
+      return
+    end
 
     # 抽選対象者取得
     participants = @lottery.participants.sort_by{rand}.take(@lottery.winning_number)
@@ -55,6 +59,10 @@ class LotteryController < ApplicationController
   end
 
   private
+    def set_my_lottery
+      @lottery = Lottery.my_lotteries(session_id).find(params[:id])
+    end
+
     def set_lottery
       @lottery = Lottery.find(params[:id])
     end

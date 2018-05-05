@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2018_05_03_171016) do
     t.integer "winning_number", default: 1, null: false
     t.text "detail"
     t.integer "status", default: 10, null: false
+    t.string "user_session", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
