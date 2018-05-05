@@ -1,30 +1,44 @@
-<h1><%= I18n.t('title.title_lottery_new') %></h1>
-<p></p>
-<%= form_for(@lottery, url: {action: "create"}) do |f| %>
-  <% if @lottery.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-      <% @lottery.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <h4><%= I18n.t('title.title_lottery_new') %></h4>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= form_for(@lottery, url: {action: "create"}, class: "col s12") do |f| %>
+      <% if @lottery.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+          <% @lottery.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="input-field col s12">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, class: "validate", placeholder: "抽選のタイトル" %>
+      </div>
+      <div class="input-field col s12">
+        <%= f.label :winning_number %><br>
+        <%= f.select :winning_number, (1..5).map{ |p| ["#{p}人", p] }, {}, {class: 'validate'} %>
+      </div>
+      <div class="input-field col s12">
+        <%= f.label :detail %><br>
+        <%= f.text_area :detail, class: "materialize-textarea", placeholder: "当選者にプレゼントをあげるなど" %>
+      </div>
+      <div class="actions center">
+        <button class="btn waves-effect waves-light" type="submit" name="action"><%= t('button.button_create') %>
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+      <%#= link_to t('button.button_back'), root_path, class: "btn waves-effect waves-light" %>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :winning_number %><br>
-    <%= f.number_field :winning_number, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :detail %><br>
-    <%= f.text_area :detail, class: "form-control" %>
-  </div>
-  <div class="actions">
-    <%= f.submit t('button.button_create'), class: "btn btn-default btn-block" %>
-    <%= link_to t('button.button_back'), root_path, class: "btn btn-default btn-block" %>
-  </div>
-<% end %>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  M.textareaAutoResize($('#lottery_detail'));
+  M.updateTextFields();
+  $('select').formSelect();
+});
+</script>

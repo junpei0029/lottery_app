@@ -1,22 +1,37 @@
-<h1><%= I18n.t('title.title_lottery_new') %></h1>
-<p></p>
-<%= form_for(@participant, url: {action: "create"}) do |f| %>
-  <% if @participant.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-      <% @participant.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="container">
+  <div class="row">
+    <h3><%= I18n.t('title.title_participant_new') %></h3>
+    <%= form_for(@participant, url: {action: "create"}) do |f| %>
+      <% if @participant.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+          <% @participant.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.hidden_field :lottery_id %>
-  <div class="field">
-    <%= f.label :user_name %><br>
-    <%= f.text_field :user_name, class: "form-control" %>
+      <%= f.hidden_field :lottery_id %>
+      <h4><%= @lottery.name %></h4>
+      <div class="col s6"><%= "当選者数：" + @lottery.winning_number.to_s + "人" %></div>
+      <p><%= @lottery.detail %></p>
+      <br>
+      <div class="input-field col s12">
+        <%= f.label :user_name %>
+        <%= f.text_field :user_name, class: "validate", placeholder: "山田　太郎" %>
+      </div>
+      <div class="actions center">
+        <button class="btn waves-effect waves-light" type="submit" name="action"><%= t('button.button_create') %>
+          <i class="material-icons right">send</i>
+        </button>
+        <%#= link_to t('button.button_back'), root_path, class: "btn btn-default btn-block" %>
+      </div>
+    <% end %>
   </div>
-  <div class="actions">
-    <%= f.submit t('button.button_create'), class: "btn btn-default btn-block" %>
-    <%= link_to t('button.button_back'), root_path, class: "btn btn-default btn-block" %>
-  </div>
-<% end %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    M.updateTextFields();
+  });
+</script>
